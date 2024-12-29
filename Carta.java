@@ -8,4 +8,16 @@ class Carta{
         this.img=i;
         this.categoria=c;
     }
+
+    public String getNome(){
+        return this.nome;
+    }
+
+    public String getImg(){
+        return this.img;
+    }
+
+    public String getCategoria(){
+        return this.categoria;
+    }
 }
