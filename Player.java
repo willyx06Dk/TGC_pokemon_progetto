@@ -25,7 +25,7 @@ class Player{
     }
 
     public int cerca(Carta c){
-        for(int i=0; i<this.panchina.lenght; ){
+        for(int i=0; i<this.panchina.size(); ){
             if(this.panchina.get(i).corrisponde(c)){
                 return i;
             }
@@ -37,8 +37,9 @@ class Player{
         int i=this.cerca(p);
         if(i!=-1){
             Carta temp=this.panchina.get(i);
-            this.panchina.get(i).assegna(attivo);
-            this.attivo.assegna(temp);
+            this.panchina.remove(temp);
+            this.panchina.add(this.attivo);
+            this.attivo=temp;
         }
     }
 }

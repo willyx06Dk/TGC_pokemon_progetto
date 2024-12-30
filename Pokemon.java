@@ -8,9 +8,10 @@ class Pokemon extends Carta{
     private String fase;
     private int energie;
 
-    public Pokemon(ArrayList<Attacco> a, int r, String d, String f){
+    public Pokemon(ArrayList<Attacco> a, int r, String d, String f, String nome, String immagine){
+        super(nome, immagine, "pokemon");
         this.attacchi=new ArrayList<Attacco>();
-        for (int index = 0; index < a.length; index++) {
+        for (int index = 0; index < a.size(); index++) {
             this.attacchi.add(a.get(index));
         }
         this.ritirata=r;
@@ -20,7 +21,7 @@ class Pokemon extends Carta{
     }
 
     public Attacco getAttacco(int pos){
-        if(pos>-1&&pos<this.attacchi.lenght){
+        if(pos>-1&&pos<this.attacchi.size()){
             return this.attacchi.get(pos);
         }
         return null;
