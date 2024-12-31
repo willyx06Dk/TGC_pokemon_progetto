@@ -6,6 +6,7 @@ class Player{
     private ArrayList<Carta> panchina;
     private Carta attivo;
     private ArrayList<Carta> scartate;
+    private Mazzo mazzo;
 
     public Player(){
         this.nome="";
@@ -14,13 +15,15 @@ class Player{
         this.panchina=new ArrayList<Carta>();
         this.attivo=null;
         this.scartate=new ArrayList<Carta>();
+        this.mazzo=null;
     }
 
     public void setNome(String n){
         this.nome=n;
     }
 
-    public void pesca(Carta c){
+    public void pesca(){
+        Carta c=this.mazzo.random();
         this.mano.add(c);
     }
 
@@ -42,4 +45,33 @@ class Player{
             this.attivo=temp;
         }
     }
+
+    public String getNome(){
+        return this.nome;
+    }
+
+    public void inizioTurno(){
+        this.energia=true;
+    }
+
+    public void assegna(){
+        this.energia=false;
+    }
+
+    public ArrayList<Carta> getScartate(){
+        return this.scartate;
+    }
+
+    public Carta getattivo(){
+        return this.attivo;
+    }
+
+    public ArrayList<Carta> getPanchina(){
+        return this.panchina;
+    }
+
+    public void leggiMazzo(String tipo){
+        this.mazzo.leggi(tipo);
+    }
+ 
 }

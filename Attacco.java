@@ -3,12 +3,14 @@ class Attacco {
     private boolean abilita;
     private int danno;
     private String effetto;
+    private int moneta;
 
-    public Attacco(int e, boolean a, int d, String ef){
+    public Attacco(int e, boolean a, int d, String ef, int m){
         this.energie=e;
         this.abilita=a;
         this.danno=d;
         this.effetto=ef;
+        this.moneta=m;
     }
 
     public int getEnergie(){
@@ -25,5 +27,9 @@ class Attacco {
 
     public String getEffetto(){
         return this.effetto;
+    }
+
+    public int getMoneta(){
+        return this.moneta;
     }
 }
