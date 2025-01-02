@@ -1,0 +1,20 @@
+pokemon;NidoranF;pokemontTCG_img/mazzi/oscurita/nidoran2.jpeg;1;lotta;base;0;60;oscurita
+pokemon;NidoranF;pokemontTCG_img/mazzi/oscurita/nidoran2.jpeg;1;lotta;base;0;60;oscurita
+pokemon;Nidorina;pokemontTCG_img/mazzi/oscurita/nidorina.jpeg;1;lotta;NidoranF;0;80;oscurita
+pokemon;Nidorina;pokemontTCG_img/mazzi/oscurita/nidorina.jpeg;1;lotta;NidoranF;0;80;oscurita
+pokemon;Nidoqueen;pokemontTCG_img/mazzi/oscurita/nidoqueen.jpeg;2;lotta;Nidorina;0;140;oscurita
+pokemon;Nidoqueen;pokemontTCG_img/mazzi/oscurita/nidoqueen.jpeg;2;lotta;Nidorina;0;140;oscurita
+pokemon;NidoranM;pokemontTCG_img/mazzi/oscurita/nidoran.jpeg;1;lotta;base;0;60;oscurita
+pokemon;NidoranM;pokemontTCG_img/mazzi/oscurita/nidoran.jpeg;1;lotta;base;0;60;oscurita
+pokemon;Nidorino;pokemontTCG_img/mazzi/oscurita/nidorino.jpeg;1;lotta;NidoranM;0;90;oscurita
+pokemon;Nidorino;pokemontTCG_img/mazzi/oscurita/nidorino.jpeg;1;lotta;NidoranM;0;90;oscurita
+pokemon;Nidoking;pokemontTCG_img/mazzi/oscurita/nidoking.jpeg;3;lotta;Nidorino;0;150;oscurita
+pokemon;Nidoking;pokemontTCG_img/mazzi/oscurita/nidoking.jpeg;3;lotta;Nidorino;0;150;oscurita
+pokemon;Tauros;pokemontTCG_img/mazzi/oscurita/tauros.jpeg;2;lotta;base;0;100;normale
+pokemon;Kangaskhan;pokemontTCG_img/mazzi/oscurita/kangaskhan.jpeg;3;lotta;base;0;100;normale
+strumento;Pozione;pokemontTCG_img/mazzi/oscurita/pozione.jpeg;cura_20
+strumento;Velocita X;pokemontTCG_img/mazzi/acqua/velocitaX.jpeg;ritirata_-1
+strumento;Pokè Ball;pokemontTCG_img/mazzi/oscurita/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/oscurita/pokèBall.jpeg;prendi_base
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/oscurita/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/oscurita/ricercaAccademica.jpeg;pesca_2

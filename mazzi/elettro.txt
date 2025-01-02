@@ -1,0 +1,20 @@
+pokemon;Pikachu;pokemontTCG_img/mazzi/elettro/pikachu.jpeg;1;lotta;base;1;120;elettro
+pokemon;Voltorb;pokemontTCG_img/mazzi/elettro/voltorb.jpeg;1;lotta;base;0;60;elettro
+pokemon;Voltorb;pokemontTCG_img/mazzi/elettro/voltorb.jpeg;1;lotta;base;0;60;elettro
+pokemon;Electrode;pokemontTCG_img/mazzi/elettro/electrode.jpeg;0;lotta;Voltorb;0;80;elettro
+pokemon;Blitzle;pokemontTCG_img/mazzi/elettro/blitzle.jpeg;1;lotta;base;0;60;elettro
+pokemon;Blitzle;pokemontTCG_img/mazzi/elettro/blitzle.jpeg;1;lotta;base;0;60;elettro
+pokemon;Zebstrika;pokemontTCG_img/mazzi/elettro/zebstrika.jpeg;1;lotta;Blitzle;0;90;elettro
+pokemon;Tynamo;pokemontTCG_img/mazzi/elettro/tynamo.jpeg;1;lotta;base;0;30;elettro
+pokemon;Tynamo;pokemontTCG_img/mazzi/elettro/tynamo.jpeg;1;lotta;base;0;30;elettro
+pokemon;Eelektrik;pokemontTCG_img/mazzi/elettro/eelektrik.jpeg;2;lotta;Tynamo;0;80;elettro
+pokemon;Eelektrik;pokemontTCG_img/mazzi/elettro/eelektrik.jpeg;2;lotta;Tynamo;0;80;elettro
+pokemon;Eelektross;pokemontTCG_img/mazzi/elettro/eelektross.jpeg;3;lotta;Eelektrik;0;140;elettro
+pokemon;Helioptile;pokemontTCG_img/mazzi/elettro/helioptile.jpeg;1;lotta;base;0;60;elettro
+pokemon;Helioptile;pokemontTCG_img/mazzi/elettro/helioptile.jpeg;1;lotta;base;0;60;elettro
+pokemon;Heliolisk;pokemontTCG_img/mazzi/elettro/heliolisk.jpeg;1;lotta;Helioptile;0;90;elettro
+strumento;Velocita X;pokemontTCG_img/mazzi/acqua/velocitaX.jpeg;ritirata_-1
+strumento;Pokè Ball;pokemontTCG_img/mazzi/elettro/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/elettro/pokèBall.jpeg;prendi_base
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/elettro/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/elettro/ricercaAccademica.jpeg;pesca_2

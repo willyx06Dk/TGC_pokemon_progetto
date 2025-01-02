@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 class Player{
     private String nome;
@@ -70,8 +71,9 @@ class Player{
         return this.panchina;
     }
 
-    public void leggiMazzo(String tipo){
-        this.mazzo.leggi(tipo);
+    public void leggiMazzo(String tipo) throws IOException{
+        this.mazzo=new Mazzo(tipo);
+        this.mazzo.leggi();
     }
  
 }

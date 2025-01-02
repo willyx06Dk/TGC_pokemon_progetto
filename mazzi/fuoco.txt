@@ -1,0 +1,20 @@
+pokemon;Charmander;pokemontTCG_img/mazzi/fuoco/charmander.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Charmander;pokemontTCG_img/mazzi/fuoco/charmander.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Charmeleon;pokemontTCG_img/mazzi/fuoco/charmeleon.jpeg;2;acqua;Charmander;0;90;fuoco
+pokemon;Charmeleon;pokemontTCG_img/mazzi/fuoco/charmeleon.jpeg;2;acqua;Charmander;0;90;fuoco
+pokemon;Charizard;pokemontTCG_img/mazzi/fuoco/charizard.jpeg;2;acqua;Charmeleon;1;180;fuoco
+pokemon;Ponyta;pokemontTCG_img/mazzi/fuoco/ponyta.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Ponyta;pokemontTCG_img/mazzi/fuoco/ponyta.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Rapidash;pokemontTCG_img/mazzi/fuoco/rapidash.jpeg;1;acqua;Ponyta;0;100;fuoco
+pokemon;Moltres;pokemontTCG_img/mazzi/fuoco/moltres.jpeg;1;elettro;base;0;100;fuoco
+pokemon;Salandit;pokemontTCG_img/mazzi/fuoco/salandit.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Salandit;pokemontTCG_img/mazzi/fuoco/salandit.jpeg;1;acqua;base;0;60;fuoco
+pokemon;Salazzle;pokemontTCG_img/mazzi/fuoco/salazzle.jpeg;1;acqua;Salandit;0;90;fuoco
+pokemon;Rattata;pokemontTCG_img/mazzi/fuoco/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Rattata;pokemontTCG_img/mazzi/fuoco/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Raticate;pokemontTCG_img/mazzi/fuoco/raticate.jpeg;1;lotta;Rattata;0;80;normale
+strumento;Velocita X;pokemontTCG_img/mazzi/acqua/velocitaX.jpeg;ritirata_-1
+strumento;Pokè Ball;pokemontTCG_img/mazzi/fuoco/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/fuoco/pokèBall.jpeg;prendi_base
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/fuoco/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/fuoco/ricercaAccademica.jpeg;pesca_2

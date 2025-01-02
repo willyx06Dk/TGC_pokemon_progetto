@@ -1,0 +1,20 @@
+pokemon;Bulbasaur;pokemontTCG_img/mazzi/erba/bulbasaur.jpeg;1;fuoco;base;0;70;erba
+pokemon;Bulbasaur;pokemontTCG_img/mazzi/erba/bulbasaur.jpeg;1;fuoco;base;0;70;erba
+pokemon;Ivysaur;pokemontTCG_img/mazzi/erba/ivysaur.jpeg;2;fuoco;Bulbasaur;0;90;erba
+pokemon;Ivysaur;pokemontTCG_img/mazzi/erba/ivysaur.jpeg;2;fuoco;Bulbasaur;0;90;erba
+pokemon;Venusaur;pokemontTCG_img/mazzi/erba/venusaur.jpeg;3;fuoco;Ivysaur;1;190;erba
+pokemon;Exeggcute;pokemontTCG_img/mazzi/erba/exeggcute.jpeg;1;fuoco;base;0;50;erba
+pokemon;Exeggcute;pokemontTCG_img/mazzi/erba/exeggcute.jpeg;1;fuoco;base;0;50;erba
+pokemon;Exeggutor;pokemontTCG_img/mazzi/erba/exeggutor.jpeg;3;fuoco;Exeggcute;0;130;erba
+pokemon;Skiddo;pokemontTCG_img/mazzi/erba/skiddo.jpeg;1;fuoco;base;0;70;erba
+pokemon;Skiddo;pokemontTCG_img/mazzi/erba/skiddo.jpeg;1;fuoco;base;0;70;erba
+pokemon;Gogoat;pokemontTCG_img/mazzi/erba/gogoat.jpeg;2;fuoco;Skiddo;0;120;erba
+pokemon;Rattata;pokemontTCG_img/mazzi/erba/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Rattata;pokemontTCG_img/mazzi/erba/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Raticate;pokemontTCG_img/mazzi/erba/raticate.jpeg;1;lotta;Rattata;0;80;normale
+strumento;Pozione;pokemontTCG_img/mazzi/erba/pozione.jpeg;cura_20
+strumento;Pokè Ball;pokemontTCG_img/mazzi/erba/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/erba/pokèBall.jpeg;prendi_base
+allenatore;Erika;pokemontTCG_img/mazzi/erba/erika.jpeg;cura_50_erba
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/erba/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/erba/ricercaAccademica.jpeg;pesca_2

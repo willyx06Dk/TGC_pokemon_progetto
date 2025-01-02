@@ -1,0 +1,20 @@
+pokemon;Mewtwo;pokemontTCG_img/mazzi/psico/mewtwo.jpeg;2;oscurita;base;1;150;psico
+pokemon;Clefairy;pokemontTCG_img/mazzi/psico/clefairy.jpeg;1;acciaio;base;0;60;psico
+pokemon;Clefairy;pokemontTCG_img/mazzi/psico/clefairy.jpeg;1;acciaio;base;0;60;psico
+pokemon;Clefable;pokemontTCG_img/mazzi/psico/clefable.jpeg;1;acciaio;Clefairy;0;100;psico
+pokemon;Slowpke;pokemontTCG_img/mazzi/psico/slowpke.jpeg;2;oscurita;base;0;70;psico
+pokemon;Slowpke;pokemontTCG_img/mazzi/psico/slowpke.jpeg;2;oscurita;base;0;70;psico
+pokemon;Slowbro;pokemontTCG_img/mazzi/psico/slowbro.jpeg;3;oscurita;Slowpke;0;130;psico
+pokemon;Gastly;pokemontTCG_img/mazzi/psico/gastly.jpeg;1;oscurita;base;0;60;psico
+pokemon;Gastly;pokemontTCG_img/mazzi/psico/gastly.jpeg;1;oscurita;base;0;60;psico
+pokemon;Haunter;pokemontTCG_img/mazzi/psico/haunter.jpeg;1;oscurita;Gastly;0;80;psico
+pokemon;Haunter;pokemontTCG_img/mazzi/psico/haunter.jpeg;1;oscurita;Gastly;0;80;psico
+pokemon;Gengar;pokemontTCG_img/mazzi/psico/gengar.jpeg;2;oscurita;Haunter;0;130;psico
+pokemon;Rattata;pokemontTCG_img/mazzi/psico/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Rattata;pokemontTCG_img/mazzi/psico/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Raticate;pokemontTCG_img/mazzi/psico/raticate.jpeg;1;lotta;Rattata;0;80;normale
+strumento;Velocita X;pokemontTCG_img/mazzi/acqua/velocitaX.jpeg;ritirata_-1
+strumento;Pokè Ball;pokemontTCG_img/mazzi/psico/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/psico/pokèBall.jpeg;prendi_base
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/psico/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/psico/ricercaAccademica.jpeg;pesca_2
