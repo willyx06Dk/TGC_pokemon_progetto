@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PockemonTCGp_Grafica", "PockemonTCGp_Grafica\PockemonTCGp_Grafica.csproj", "{CC77A938-EF45-4EBF-A1E5-8C2852B8AB43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC77A938-EF45-4EBF-A1E5-8C2852B8AB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC77A938-EF45-4EBF-A1E5-8C2852B8AB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC77A938-EF45-4EBF-A1E5-8C2852B8AB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC77A938-EF45-4EBF-A1E5-8C2852B8AB43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7886FFDC-5990-4E11-8ACC-4F2AF8A61647}
+	EndGlobalSection
+EndGlobal
