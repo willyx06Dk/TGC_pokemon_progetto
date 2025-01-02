@@ -1,0 +1,20 @@
+pokemon;Squirtle;pokemontTCG_img/mazzi/acqua/squirtle.jpeg;1;elettro;base;0;60;acqua
+pokemon;Squirtle;pokemontTCG_img/mazzi/acqua/squirtle.jpeg;1;elettro;base;0;60;acqua
+pokemon;Wartortle;pokemontTCG_img/mazzi/acqua/wartortle.jpeg;1;elettro;Squirtle;0;80;acqua
+pokemon;Wartortle;pokemontTCG_img/mazzi/acqua/wartortle.jpeg;1;elettro;Squirtle;0;80;acqua
+pokemon;Blastoise;pokemontTCG_img/mazzi/acqua/blastoise.jpeg;3;elettro;Wartortle;1;180;acqua
+pokemon;Psyduck;pokemontTCG_img/mazzi/acqua/psyduck.jpeg;1;elettro;base;0;60;acqua
+pokemon;Psyduck;pokemontTCG_img/mazzi/acqua/psyduck.jpeg;1;elettro;base;0;60;acqua
+pokemon;Golduck;pokemontTCG_img/mazzi/acqua/golduck.jpeg;1;elettro;Psyduck;0;90;acqua
+pokemon;Lapras;pokemontTCG_img/mazzi/acqua/lapras.jpeg;2;elettro;base;0;100;acqua
+pokemon;Articuno;pokemontTCG_img/mazzi/acqua/articuno.jpeg;1;elettro;base;0;100;acqua
+pokemon;Pyukumuku;pokemontTCG_img/mazzi/acqua/pyukumuku.jpeg;2;elettro;base;0;70;acqua
+pokemon;Rattata;pokemontTCG_img/mazzi/acqua/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Rattata;pokemontTCG_img/mazzi/acqua/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Raticate;pokemontTCG_img/mazzi/acqua/raticate.jpeg;1;lotta;Rattata;0;80;normale
+strumento;Velocita X;pokemontTCG_img/mazzi/acqua/velocitaX.jpeg;ritirata_-1
+strumento;Pokè Ball;pokemontTCG_img/mazzi/acqua/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/acqua/pokèBall.jpeg;prendi_base
+allenatore;Misty;pokemontTCG_img/mazzi/acqua/misty.jpeg;tira_testa_+1_croce_stop_acqua
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/acqua/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/acqua/ricercaAccademica.jpeg;pesca_2

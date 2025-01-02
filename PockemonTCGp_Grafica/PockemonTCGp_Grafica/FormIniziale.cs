@@ -70,7 +70,7 @@ namespace PockemonTCGp_Grafica
             etichettaErrore = new Label();
             etichettaErrore.Text = "Il nome è obbligatorio!";
             etichettaErrore.ForeColor = System.Drawing.Color.Red;
-            etichettaErrore.Location = new System.Drawing.Point(350, 550);  /
+            etichettaErrore.Location = new System.Drawing.Point(350, 550);  
             etichettaErrore.Size = new System.Drawing.Size(200, 20);
             etichettaErrore.Visible = false;  
 

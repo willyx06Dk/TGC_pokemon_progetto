@@ -1,0 +1,20 @@
+pokemon;Machop;pokemontTCG_img/mazzi/lotta/machop.jpeg;2;psico;base;0;70;lotta
+pokemon;Machop;pokemontTCG_img/mazzi/lotta/machop.jpeg;2;psico;base;0;70;lotta
+pokemon;Machoke;pokemontTCG_img/mazzi/lotta/machoke.jpeg;2;psico;Machop;0;100;lotta
+pokemon;Machoke;pokemontTCG_img/mazzi/lotta/machoke.jpeg;2;psico;Machop;0;100;lotta
+pokemon;Machamp;pokemontTCG_img/mazzi/lotta/machamp.jpeg;3;psico;Machoke;1;180;lotta
+pokemon;Mankey;pokemontTCG_img/mazzi/lotta/mankey.jpeg;1;psico;base;0;60;lotta
+pokemon;Mankey;pokemontTCG_img/mazzi/lotta/mankey.jpeg;1;psico;base;0;60;lotta
+pokemon;Primeape;pokemontTCG_img/mazzi/lotta/primeape.jpeg;1;psico;Mankey;0;90;lotta
+pokemon;Cubone;pokemontTCG_img/mazzi/lotta/cubone.jpeg;1;erba;base;0;60;lotta
+pokemon;Cubone;pokemontTCG_img/mazzi/lotta/cubone.jpeg;1;erba;base;0;60;lotta
+pokemon;Marowak;pokemontTCG_img/mazzi/lotta/marowak.jpeg;2;erba;Cubone;0;100;lotta
+pokemon;Hitmonlee;pokemontTCG_img/mazzi/lotta/hitmonlee.jpeg;1;psico;base;0;80;lotta
+pokemon;Rattata;pokemontTCG_img/mazzi/lotta/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Rattata;pokemontTCG_img/mazzi/lotta/rattata.jpeg;1;lotta;base;0;40;normale
+pokemon;Raticate;pokemontTCG_img/mazzi/lotta/raticate.jpeg;1;lotta;Rattata;0;80;normale
+strumento;Pozione;pokemontTCG_img/mazzi/lotta/pozione.jpeg;cura_20
+strumento;Pokè Ball;pokemontTCG_img/mazzi/lotta/pokèBall.jpeg;prendi_base
+strumento;Pokè Ball;pokemontTCG_img/mazzi/lotta/pokèBall.jpeg;prendi_base
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/lotta/ricercaAccademica.jpeg;pesca_2
+allenatore;Ricerca Accademica;pokemontTCG_img/mazzi/lotta/ricercaAccademica.jpeg;pesca_2
