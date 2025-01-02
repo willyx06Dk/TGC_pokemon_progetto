@@ -52,6 +52,13 @@
     <Compile Include="FormIniziale.Designer.cs">
       <DependentUpon>FormIniziale.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSceltaMazzo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSceltaMazzo.Designer.cs">
+      <DependentUpon>FormSceltaMazzo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moneta.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

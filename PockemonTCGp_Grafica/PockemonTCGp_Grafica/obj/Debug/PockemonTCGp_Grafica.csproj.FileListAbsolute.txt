@@ -9,3 +9,14 @@ C:\Users\39329\Desktop\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\Pocke
 C:\Users\39329\Desktop\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.exe
 C:\Users\39329\Desktop\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.pdb
 C:\Users\39329\Desktop\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.FormIniziale.resources
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\bin\Debug\PockemonTCGp_Grafica.exe.config
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\bin\Debug\PockemonTCGp_Grafica.exe
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\bin\Debug\PockemonTCGp_Grafica.pdb
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.csproj.AssemblyReference.cache
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.csproj.SuggestedBindingRedirects.cache
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.FormIniziale.resources
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.Properties.Resources.resources
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.csproj.GenerateResource.cache
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.csproj.CoreCompileInputs.cache
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.exe
+C:\Users\39329\Desktop\progettoTCGPocket\PockemonTCGp_Grafica\PockemonTCGp_Grafica\obj\Debug\PockemonTCGp_Grafica.pdb
