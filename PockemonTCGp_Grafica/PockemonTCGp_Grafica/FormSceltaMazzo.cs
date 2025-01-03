@@ -101,4 +101,4 @@ namespace PockemonTCGp_Grafica
             this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
-}
+} //---Dzyubanov---

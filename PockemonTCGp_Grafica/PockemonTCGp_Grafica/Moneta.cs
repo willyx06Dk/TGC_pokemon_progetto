@@ -25,4 +25,4 @@ namespace PockemonTCGp_Grafica
             return random.Next(0, 2) == 0 ? "Faccia" : "Retro";
         }
     }
-}
+} //---Dzyubanov---
