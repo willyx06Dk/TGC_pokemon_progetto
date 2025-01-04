@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,87 +14,78 @@ namespace PockemonTCGp_Grafica
 {
     public partial class FormSceltaMazzo : Form
     {
-        private FlowLayoutPanel pannelloEnergie;
-
         public FormSceltaMazzo()
         {
             InitializeComponent();
-
-            this.Text = "Scelta del Mazzo";
+            CaricaEnergiaImages();
             this.Size = new Size(900, 770);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.White;
-
             ImpostaDimensioniFisse();
-            CaricaEnergie();
         }
 
-        private void CaricaEnergie()
+        private void CaricaEnergiaImages()
         {
-            string percorsoCartella = Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie");
+            string percorsoImmagini = System.IO.Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie");
+            string[] energie = { "fuoco.png", "acqua.png", "erba.png", "lampo.png", "psico.png", "lotta.png", "oscurità.png" };
 
-            if (!Directory.Exists(percorsoCartella))
+            int xPos = 50; //pos iniziale delle immagini
+            foreach (string energia in energie)
             {
-                MessageBox.Show("La cartella delle immagini non è stata trovata.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            //creazione del pannello per contenere le immagini
-            pannelloEnergie = new FlowLayoutPanel();
-            pannelloEnergie.Dock = DockStyle.Fill;
-            pannelloEnergie.AutoScroll = true;
-            pannelloEnergie.FlowDirection = FlowDirection.LeftToRight;
-            pannelloEnergie.WrapContents = true;
-
-            //caricamento immagini
-            var fileImmagini = Directory.GetFiles(percorsoCartella, "*.png");
-            foreach (var file in fileImmagini)
-            {
-                PictureBox immagine = new PictureBox
+                string percorsoCompleto = System.IO.Path.Combine(percorsoImmagini, energia);
+                if (System.IO.File.Exists(percorsoCompleto))
                 {
-                    Image = Image.FromFile(file),
-                    Size = new Size(100, 100), // Dimensioni di ogni immagine
-                    SizeMode = PictureBoxSizeMode.Zoom, // Adatta l'immagine all'area
-                    Cursor = Cursors.Hand,
-                    Tag = Path.GetFileNameWithoutExtension(file) // Nome del file senza estensione
-                };
+                    PictureBox pictureBox = new PictureBox
+                    {
+                        Image = Image.FromFile(percorsoCompleto),
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Size = new Size(100, 100),
+                        Location = new Point(xPos, 300),
+                        Cursor = Cursors.Hand,
+                        Tag = energia //salva il nome dell'immagine per identificare il tipo di mazzo
+                    };
 
-                // Aggiungi eventi per il mouse
-                immagine.MouseEnter += (s, e) => immagine.BackColor = Color.FromArgb(128, Color.Gray); // Effetto trasparenza
-                immagine.MouseLeave += (s, e) => immagine.BackColor = Color.Transparent; // Rimuovi trasparenza
-                immagine.Click += (s, e) =>
+                    pictureBox.MouseEnter += (s, e) => { pictureBox.BackColor = Color.FromArgb(128, 255, 255, 255); };
+                    pictureBox.MouseLeave += (s, e) => { pictureBox.BackColor = Color.Transparent; };
+                    pictureBox.Click += PictureBox_Click;
+
+                    this.Controls.Add(pictureBox);
+                    xPos += 120; //sposta la prossima immagine più a destra
+                }
+                else
                 {
-                    // Invia il nome del mazzo scelto al server
-                    string nomeMazzo = immagine.Tag.ToString();
-                    MessageBox.Show($"Hai scelto il mazzo: {nomeMazzo}", "Scelta del Mazzo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    InviaNomeMazzoAlServer(nomeMazzo);
-                };
-
-                pannelloEnergie.Controls.Add(immagine);
+                    MessageBox.Show($"Immagine non trovata: {energia}");
+                }
             }
-
-            this.Controls.Add(pannelloEnergie);
         }
 
-        private void InviaNomeMazzoAlServer(string nomeMazzo)
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox)
+            {
+                string tipoMazzo = pictureBox.Tag.ToString().Replace(".png", ""); 
+                InviaMazzoAlServer(tipoMazzo);
+                MessageBox.Show($"Mazzo scelto: {tipoMazzo}");
+                // **** passa al form del gioco bla bla
+            }
+        }
+
+        private void InviaMazzoAlServer(string tipoMazzo)
         {
             try
             {
-                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("127.0.0.1", 12345))
-                using (StreamWriter writer = new StreamWriter(client.GetStream()))
+                using (UdpClient udpClient = new UdpClient())
                 {
-                    writer.WriteLine(nomeMazzo);
-                    writer.Flush();
+                    string ipServer = "127.0.0.1"; 
+                    int portaServer = 12345;      
+                    byte[] dati = Encoding.UTF8.GetBytes(tipoMazzo);
+                    udpClient.Send(dati, dati.Length, ipServer, portaServer);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Errore durante l'invio del mazzo al server: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Errore durante l'invio del mazzo: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //impedisce la modifica delle dimensioni del form iniziale
         private void ImpostaDimensioniFisse()
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;

@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Net.Sockets;
+using System.Net;
 
 namespace PockemonTCGp_Grafica
 {
@@ -20,6 +22,10 @@ namespace PockemonTCGp_Grafica
         private Label etichettaErrore;
         private Player giocatore;
 
+        //per comunicazione UDP
+        private UdpClient udpListener;
+        private Thread listenerThread;
+
         public FormIniziale()
         {
             InitializeComponent();
@@ -28,6 +34,9 @@ namespace PockemonTCGp_Grafica
             CaricaBackground();
             this.Size = new System.Drawing.Size(900, 770);  //imposta le dimensioni della finestra
             ImpostaDimensioniFisse();
+
+            //avvio del listener UDP in un thread separato
+            AvviaListenerUdp();
         }
 
         private void menu()
@@ -113,23 +122,18 @@ namespace PockemonTCGp_Grafica
 
         private void PulsanteInizia_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(casellaNome.Text) || casellaNome.Text == "Inserisci nome")
+            if (string.IsNullOrWhiteSpace(casellaNome.Text))
             {
                 etichettaErrore.Visible = true;
             }
             else
             {
                 giocatore = new Player(casellaNome.Text);
-
-                //nascondi l'errore e avvia il gioco
                 etichettaErrore.Visible = false;
-                MessageBox.Show($"Benvenuto, {giocatore.Nome}!");
 
-                //invio del nome al server
+                //invia il nome al server
                 InviaNomeAlServer(giocatore.Nome);
-
-                //passa alla schermata di gioco successiva *****
-                this.Hide();
+                MessageBox.Show($"Nome inviato: {giocatore.Nome}");
             }
         }
 
@@ -137,26 +141,54 @@ namespace PockemonTCGp_Grafica
         {
             try
             {
-                string ipServer = "127.0.0.1";  
-                int portaServer = 12345;         
-
-                using (Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (UdpClient udpClient = new UdpClient())
                 {
-                    clientSocket.Connect(ipServer, portaServer);
-                    byte[] byteNome = Encoding.UTF8.GetBytes(nomeGiocatore);
-                    clientSocket.Send(byteNome);
-
-                    clientSocket.Close();
+                    string ipServer = "127.0.0.1"; 
+                    int portaServer = 12345;      
+                    byte[] dati = Encoding.UTF8.GetBytes(nomeGiocatore);
+                    udpClient.Send(dati, dati.Length, ipServer, portaServer);
                 }
-
-                MessageBox.Show("Nome inviato al server!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Errore durante la connessione al server: " + ex.Message);
+                MessageBox.Show($"Errore durante l'invio: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void AvviaListenerUdp()
+        {
+            udpListener = new UdpClient(12346); //porta per ricevere messaggi
+            listenerThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 12346);
+                        byte[] datiRicevuti = udpListener.Receive(ref remoteEndPoint);
+                        string messaggio = Encoding.UTF8.GetString(datiRicevuti);
+
+                        if (messaggio == "OK")
+                        {
+                            //passa al FormSceltaMazzo
+                            this.Invoke(new Action(() =>
+                            {
+                                MessageBox.Show("Connessione confermata. Passando alla scelta del mazzo...");
+                                FormSceltaMazzo formSceltaMazzo = new FormSceltaMazzo();
+                                formSceltaMazzo.Show();
+                                this.Hide();
+                            }));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Errore durante la ricezione: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            });
+            listenerThread.IsBackground = true;
+            listenerThread.Start();
+        }
         //impedisce la modifica delle dimensioni del form iniziale
         private void ImpostaDimensioniFisse()
         {
@@ -164,5 +196,13 @@ namespace PockemonTCGp_Grafica
             this.MaximizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            udpListener?.Close();
+            listenerThread?.Abort();
+            base.OnFormClosing(e);
+        }
     }
+}
 } //---Dzyubanov---
