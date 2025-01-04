@@ -24,6 +24,12 @@ class server{
                     p2=new Player(messaggio, packet);
                 }
                 giocatori++;
+                String ok="ok";
+                buffer=ok.getBytes();
+                DatagramPacket inserito=new DatagramPacket(buffer, buffer.length);
+                inserito.setAddress(packet.getAddress());
+                inserito.setPort(packet.getPort());
+                socket.send(inserito);
             }
         }
         boolean scelta1=false;
@@ -47,13 +53,19 @@ class server{
                         scelta2=true;
                     }
                 }
+                String aspetta="attendi";
+                buffer=aspetta.getBytes();
+                DatagramPacket attesa=new DatagramPacket(buffer, buffer.length);
+                packet.setAddress(packet.getAddress());
+                packet.setPort(packet.getPort());
+                socket.send(attesa);
             }
         }
         Random r=new Random();
         turno=r.nextInt(1)+1;
         DatagramSocket socket = new DatagramSocket(12345);
         String risp1="inizia";
-        String risp2="aspetta";
+        String risp2="secondo";
         byte[] b1;
         b1=risp1.getBytes();
         byte[] b2;
