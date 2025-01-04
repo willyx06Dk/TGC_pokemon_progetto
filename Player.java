@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.util.ArrayList;
 class Player{
     private String nome;
@@ -8,15 +9,19 @@ class Player{
     private Carta attivo;
     private ArrayList<Carta> scartate;
     private Mazzo mazzo;
+    private DatagramPacket pacchetto;
+    private int punti;
 
-    public Player(){
-        this.nome="";
+    public Player(String n, DatagramPacket p){
+        this.nome=n;
         this.energia=false;
         this.mano=new ArrayList<Carta>();
         this.panchina=new ArrayList<Carta>();
         this.attivo=null;
         this.scartate=new ArrayList<Carta>();
         this.mazzo=null;
+        this.pacchetto=p;
+        this.punti=0;
     }
 
     public void setNome(String n){
@@ -75,5 +80,16 @@ class Player{
         this.mazzo=new Mazzo(tipo);
         this.mazzo.leggi();
     }
+
+    public DatagramPacket getPacket(){
+        return this.pacchetto;
+    }
  
+    public void addPunti(int val){
+        this.punti+=val;
+    }
+
+    public int getPunti(){
+        return this.punti;
+    }
 }
