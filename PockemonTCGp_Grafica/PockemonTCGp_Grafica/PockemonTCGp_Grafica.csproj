@@ -49,6 +49,12 @@
     <Compile Include="Allenatore.cs" />
     <Compile Include="Attacco.cs" />
     <Compile Include="Carta.cs" />
+    <Compile Include="FormCaricamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCaricamento.Designer.cs">
+      <DependentUpon>FormCaricamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIniziale.cs">
       <SubType>Form</SubType>
     </Compile>

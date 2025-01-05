@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,75 +15,105 @@ namespace PockemonTCGp_Grafica
 {
     public partial class FormSceltaMazzo : Form
     {
-        public FormSceltaMazzo()
+        private UdpClient udpClient;
+        private IPEndPoint serverEndpoint;
+        private string[] mazzoPaths;
+        private PictureBox[] mazziImages;
+
+        public FormSceltaMazzo(UdpClient udpClient, IPEndPoint serverEndpoint)
         {
             InitializeComponent();
-            CaricaEnergiaImages();
+
+            this.udpClient = udpClient;
+            this.serverEndpoint = serverEndpoint;
+
             this.Size = new Size(900, 770);
+            CaricaBackground();
+            MostraMazzi();
             ImpostaDimensioniFisse();
         }
 
-        private void CaricaEnergiaImages()
+        private void CaricaBackground()
         {
-            string percorsoImmagini = System.IO.Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie");
-            string[] energie = { "fuoco.png", "acqua.png", "erba.png", "lampo.png", "psico.png", "lotta.png", "oscurità.png" };
-
-            int xPos = 50; //pos iniziale delle immagini
-            foreach (string energia in energie)
+            string percorsoImmagine = Path.Combine(Application.StartupPath, "pokemonTCG_img", "background.jpg");
+            if (File.Exists(percorsoImmagine))
             {
-                string percorsoCompleto = System.IO.Path.Combine(percorsoImmagini, energia);
-                if (System.IO.File.Exists(percorsoCompleto))
-                {
-                    PictureBox pictureBox = new PictureBox
-                    {
-                        Image = Image.FromFile(percorsoCompleto),
-                        SizeMode = PictureBoxSizeMode.StretchImage,
-                        Size = new Size(100, 100),
-                        Location = new Point(xPos, 300),
-                        Cursor = Cursors.Hand,
-                        Tag = energia //salva il nome dell'immagine per identificare il tipo di mazzo
-                    };
-
-                    pictureBox.MouseEnter += (s, e) => { pictureBox.BackColor = Color.FromArgb(128, 255, 255, 255); };
-                    pictureBox.MouseLeave += (s, e) => { pictureBox.BackColor = Color.Transparent; };
-                    pictureBox.Click += PictureBox_Click;
-
-                    this.Controls.Add(pictureBox);
-                    xPos += 120; //sposta la prossima immagine più a destra
-                }
-                else
-                {
-                    MessageBox.Show($"Immagine non trovata: {energia}");
-                }
+                this.BackgroundImage = Image.FromFile(percorsoImmagine);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            else
+            {
+                MessageBox.Show("Sfondo non trovato!");
             }
         }
 
-        private void PictureBox_Click(object sender, EventArgs e)
+        private void MostraMazzi()
         {
-            if (sender is PictureBox pictureBox)
+            string energieFolder = Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie");
+            if (!Directory.Exists(energieFolder))
             {
-                string tipoMazzo = pictureBox.Tag.ToString().Replace(".png", ""); 
-                InviaMazzoAlServer(tipoMazzo);
-                MessageBox.Show($"Mazzo scelto: {tipoMazzo}");
-                // **** passa al form del gioco bla bla
+                MessageBox.Show("Cartella delle energie non trovata!");
+                return;
+            }
+
+            mazzoPaths = Directory.GetFiles(energieFolder, "*.jpg");
+            mazziImages = new PictureBox[mazzoPaths.Length];
+
+            int startX = 50, startY = 200, spacing = 20;
+            for (int i = 0; i < mazzoPaths.Length; i++)
+            {
+                PictureBox mazzoImg = new PictureBox();
+                mazzoImg.Image = Image.FromFile(mazzoPaths[i]);
+                mazzoImg.Size = new Size(120, 120);
+                mazzoImg.SizeMode = PictureBoxSizeMode.StretchImage;
+                mazzoImg.Location = new Point(startX + i * (120 + spacing), startY);
+
+                mazzoImg.MouseEnter += (sender, e) =>
+                {
+                    mazzoImg.BackColor = Color.FromArgb(128, 0, 0, 0);
+                };
+                mazzoImg.MouseLeave += (sender, e) =>
+                {
+                    mazzoImg.BackColor = Color.Transparent;
+                };
+
+                mazzoImg.Click += (sender, e) => InviaMazzoScelto(mazzoPaths[i]);
+
+                this.Controls.Add(mazzoImg);
+                mazziImages[i] = mazzoImg;
             }
         }
 
-        private void InviaMazzoAlServer(string tipoMazzo)
+        private async void InviaMazzoScelto(string mazzo)
         {
-            try
+            string nomeMazzo = Path.GetFileNameWithoutExtension(mazzo);
+            byte[] data = Encoding.UTF8.GetBytes(nomeMazzo);
+
+            await udpClient.SendAsync(data, data.Length, serverEndpoint);
+
+            RiceviMessaggiDalServer();
+        }
+
+        private async void RiceviMessaggiDalServer()
+        {
+            while (true)
             {
-                using (UdpClient udpClient = new UdpClient())
+                UdpReceiveResult result = await udpClient.ReceiveAsync();
+                string messaggio = Encoding.UTF8.GetString(result.Buffer);
+
+                if (messaggio == "attendi")
                 {
-                    string ipServer = "127.0.0.1"; 
-                    int portaServer = 12345;      
-                    byte[] dati = Encoding.UTF8.GetBytes(tipoMazzo);
-                    udpClient.Send(dati, dati.Length, ipServer, portaServer);
+                    FormCaricamento formCaricamento = new FormCaricamento(udpClient, serverEndpoint);
+                    this.Hide();
+                    formCaricamento.ShowDialog();
+                    this.Close();
+                    break;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Errore durante l'invio del mazzo: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (messaggio == "inizio gioco")
+                {
+                    //*** passa al form del gioco bla bla
+                    break;
+                }
             }
         }
 
