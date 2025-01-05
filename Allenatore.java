@@ -9,4 +9,9 @@ class Allenatore extends Carta{
     public String getAzione(){
         return this.azione;
     }
+
+    public String toCSV(){
+        String s=super.toCSV()+";"+this.azione;
+        return s;
+    }
 }

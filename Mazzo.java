@@ -23,6 +23,28 @@ class Mazzo {
         return c;
     }
 
+    public Carta cercaFase(String f){
+        for (int index = 0; index < this.carte.size(); index++) {
+            String fase=((Pokemon)this.carte.get(index)).getFase();
+            if(fase.equals(f)){
+                this.carte.remove(this.carte.get(index));
+                return this.carte.get(index);
+            }
+        }
+        return null;
+    }
+
+    public Carta cercaPokemon(String f){
+        for (int index = 0; index < this.carte.size(); index++) {
+            String fase=((Pokemon)this.carte.get(index)).getNome();
+            if(fase.equals(f)){
+                this.carte.remove(this.carte.get(index));
+                return this.carte.get(index);
+            }
+        }
+        return null;
+    }
+
     public void leggi() throws IOException{
         File file=new File(this.tipo);
         if(file.exists()){
@@ -66,5 +88,9 @@ class Mazzo {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void add(Carta c){
+        this.carte.add(c);
     }
 }

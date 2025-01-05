@@ -15,6 +15,7 @@ class Pokemon extends Carta{
     private int ex;
     private int vita;
     private String tipo;
+    private String stato;
 
     public Pokemon(int r, String d, String f, String nome, String immagine, int e, int vita, String t){
         super(nome, immagine, "pokemon");
@@ -26,6 +27,7 @@ class Pokemon extends Carta{
         this.ex=e;
         this.vita=vita;
         this.tipo=t;
+        this.stato="";
     }
 
     public Attacco getAttacco(int pos){
@@ -51,8 +53,8 @@ class Pokemon extends Carta{
         return this.energie;
     }
 
-    public void addEnergia(){
-        this.energie++;
+    public void addEnergia(int i){
+        this.energie+=i;
     }
 
     public void rimuoviEnergie(int n){
@@ -105,7 +107,7 @@ class Pokemon extends Carta{
 
     public String toCSV(){
         String s=super.toCSV();
-        s+=this.ritirata+";"+this.debolezza+";"+this.fase+";"+this.energie+";"+this.ex+";"+this.vita+";"+this.tipo+";attacchi;";
+        s+=";"+this.ritirata+";"+this.debolezza+";"+this.fase+";"+this.energie+";"+this.ex+";"+this.vita+";"+this.tipo+";attacchi;";
         for (int index = 0; index < this.attacchi.size(); index++) {
             s+=this.attacchi.get(index).toCSV();
             if(index+1!=this.attacchi.size()){
@@ -113,5 +115,17 @@ class Pokemon extends Carta{
             }
         }
         return s;
+    }
+
+    public boolean setRitirata(int val){
+        if(this.ritirata>0){
+            this.ritirata-=1;
+            return true;
+        }
+        return false;
+    }
+
+    public void setStato(String s){
+        this.stato=s;
     }
 }
