@@ -32,4 +32,10 @@ class Carta{
         }
         return si;
     }
+
+    public String toCSV(){
+        String s="";
+        s+=this.categoria+";"+this.nome+";"+img;
+        return s;
+    }
 }

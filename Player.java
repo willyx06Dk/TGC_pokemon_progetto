@@ -28,9 +28,10 @@ class Player{
         this.nome=n;
     }
 
-    public void pesca(){
+    public Carta pesca(){
         Carta c=this.mazzo.random();
         this.mano.add(c);
+        return c;
     }
 
     public int cerca(Carta c){
@@ -91,5 +92,26 @@ class Player{
 
     public int getPunti(){
         return this.punti;
+    }
+
+    public void setAttivo(int i){
+        if(this.attivo==null){
+            this.attivo=this.mano.get(i);
+            this.mano.remove(i);
+        }
+    }
+
+    public int aggiungiPanchina(int i){
+        int indice=-1;
+        if(this.panchina.size()<4){
+            for (int index = 0; index < this.panchina.size(); index++) {
+                if(this.panchina.get(index)==null){
+                    indice=index;
+                    break;
+                }
+            }
+            this.panchina.add(this.mano.get(i));
+        }
+        return indice;
     }
 }

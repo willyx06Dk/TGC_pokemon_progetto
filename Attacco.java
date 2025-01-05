@@ -32,4 +32,9 @@ class Attacco {
     public int getMoneta(){
         return this.moneta;
     }
+
+    public String toCSV(){
+        String s=this.energie+";"+this.abilita+";"+this.danno+";"+this.effetto+";"+this.moneta;
+        return s;
+    }
 }

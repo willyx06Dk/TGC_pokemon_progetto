@@ -102,4 +102,16 @@ class Pokemon extends Carta{
             }
         }
     }
+
+    public String toCSV(){
+        String s=super.toCSV();
+        s+=this.ritirata+";"+this.debolezza+";"+this.fase+";"+this.energie+";"+this.ex+";"+this.vita+";"+this.tipo+";attacchi;";
+        for (int index = 0; index < this.attacchi.size(); index++) {
+            s+=this.attacchi.get(index).toCSV();
+            if(index+1!=this.attacchi.size()){
+                s+=";";
+            }
+        }
+        return s;
+    }
 }

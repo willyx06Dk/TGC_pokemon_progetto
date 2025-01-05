@@ -4,7 +4,7 @@ import java.net.DatagramSocket;
 import java.util.Random;
 
 class server{
-    public static void main(String[] args) throws IOException {
+    public void main(String[] args) throws IOException {
         Player p1=null;
         Player p2=null;
         int giocatori=0;
@@ -89,12 +89,17 @@ class server{
             aspetta.setPort(p1.getPacket().getPort());
             socket.send(aspetta);
         }
+        for (int i = 0; i < 5; i++) {
+            inviaCarta(p1, socket);
+            inviaCarta(p2, socket);
+        }
+        boolean iniziale=true;
         while(fine==false){
             if(turno==1){
-
+                Turno(turno, p1, socket, iniziale);
             }
             else{
-
+                Turno(turno, p1, socket, iniziale);
             }
             if(p1.getPunti()>=3 || p2.getPunti()>=3){
                 fine=true;
@@ -123,4 +128,52 @@ class server{
             socket.send(perde);
         }
     }
+
+    public static void inviaCarta(Player p, DatagramSocket s) throws IOException{
+        Carta c=p.pesca();
+        byte[] vett;
+        vett=c.toCSV().getBytes();
+        DatagramPacket carta=new DatagramPacket(vett, vett.length);
+        carta.setAddress(p.getPacket().getAddress());
+        carta.setPort(p.getPacket().getPort());
+        s.send(carta);
+    }
+
+    public static void Turno(int turno, Player p, DatagramSocket s, boolean iniziale) throws IOException{
+        if(iniziale==false){
+            p.inizioTurno();
+        }
+        else{
+            iniziale=false;
+        }
+        inviaCarta(p, s);
+        while(true){
+            boolean allenatore=false;
+            s = new DatagramSocket(12345);
+            byte[] buffer= new byte[1500];
+            DatagramPacket packet=new DatagramPacket(buffer, buffer.length);
+            s.receive(packet);
+            String messaggio = new String(packet.getData(), 0, packet.getLength());
+            String[] codice=messaggio.split(";");
+            if(codice[0].equals("attivo")){
+                p.setAttivo(Integer.parseInt(codice[1]));
+            }
+            else if(codice[0].equals("panchina")){
+                p.aggiungiPanchina(Integer.parseInt(codice[1]));
+            }
+            else if(codice[0].equals("giocata")){
+                if(codice[1].equals("strumento")){
+
+                }
+                else if(codice[1].equals("strumento") && allenatore==false){
+                    allenatore=true;
+                }
+            }
+            else if(codice[0].equals("attacco")){
+                turno=2;
+                break;
+            }
+        }
+    }
 }
+
