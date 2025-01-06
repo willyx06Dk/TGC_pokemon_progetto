@@ -152,6 +152,7 @@ class server{
         String[] informazioni=effetto.split("_");
         if(informazioni[0].equals("ritirata")){
             if(p.diminuisciRitirata()){
+                p.giocata("Velocita X");
                 return true;
             }
             else{
@@ -172,6 +173,7 @@ class server{
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                p.giocata("Poke Ball");
                 return true;
             }
             else{
@@ -180,6 +182,7 @@ class server{
         }
         if(informazioni[0].equals("cura") && informazioni.length<3){
             if(p.cura(n, 20)){
+                p.giocata("Pozione");
                 return true;
             }
             else{
@@ -188,6 +191,7 @@ class server{
         }
         if(informazioni[0].equals("cura") && informazioni.length>=3){
             if(p.curaTipo(n, 50, "erba")){
+                p.giocata("Erika");
                 return true;
             }
             else{
@@ -216,7 +220,9 @@ class server{
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            p.giocata("Misty");
             p.addEnergie(energie);
+            return true;
         }
         if(informazioni[0].equals("pesca")){
             for (int index = 0; index < Integer.parseInt(informazioni[1]); index++) {
@@ -227,6 +233,8 @@ class server{
                     e.printStackTrace();
                 }
             }
+            p.giocata("Ricerca Accademica");
+            return true;
         }
         return false;
     }
@@ -309,6 +317,10 @@ class server{
         if(ok){
             danni+=p1.getAttacco(i).getDanno();
         }
+        if(((Pokemon)p1.getattivo()).getStato().equals("-20")){
+            danni-=20;
+            ((Pokemon)p1.getattivo()).setStato("");
+        }
         int vita=0;
         if(target.equals("attivo")){
             vita=p2.danneggiato(danni, effetto);
@@ -344,6 +356,59 @@ class server{
         }
     }
 
+    public static void controlloStato(Player p1, Player p2,DatagramSocket s) throws IOException{
+        if(((Pokemon)p1.getattivo()).getVita()<=0){
+            int punti=0;
+            if(((Pokemon)p1.getattivo()).getEx()==1){
+                punti=2;
+            }
+            else{
+                punti=1;
+            }
+            p2.addPunti(punti);
+            String situazione="ko;"+p2.getPunti();
+            byte[] vett;
+            vett=situazione.getBytes();
+            DatagramPacket ko=new DatagramPacket(vett, vett.length);
+            ko.setAddress(p2.getPacket().getAddress());
+            ko.setPort(p2.getPacket().getPort());
+            try {
+                s.send(ko);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            p1.scarta();
+            situazione="sconfitto";
+            vett=situazione.getBytes();
+            DatagramPacket sonfitto=new DatagramPacket(vett, vett.length);
+            sonfitto.setAddress(p1.getPacket().getAddress());
+            sonfitto.setPort(p1.getPacket().getPort());
+            try {
+                s.send(sonfitto);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            while (true) {
+                byte[] buffer= new byte[1500];
+                DatagramPacket packet=new DatagramPacket(buffer, buffer.length);
+                s.receive(packet);
+                String messaggio = new String(packet.getData(), 0, packet.getLength());
+                String[] codice=messaggio.split(";");
+                if(codice[0].equals("sostituisci")){
+                    if(p1.sostituisci(codice[1])){
+                        inviaRisposta(p1, s, "ok");
+                        break;
+                    }
+                    else{
+                        inviaRisposta(p1, s, "no");
+                    }
+                }
+            }
+        }
+    }
+
     public static void Turno(int turno, Player p1, Player p2,DatagramSocket s, boolean iniziale) throws IOException{
         if(iniziale==false){
             p1.inizioTurno();
@@ -352,7 +417,34 @@ class server{
             iniziale=false;
         }
         inviaCarta(p1, s);
-        while(true){
+        if(((Pokemon)p1.getattivo()).getStato().equals("avvelenato")){
+            int v=p1.danneggiato(10, "avvelenato");
+            String situazione=p1.getattivo().getNome()+";"+v+";"+"";
+            byte[] vett;
+            vett=situazione.getBytes();
+            DatagramPacket ritorno=new DatagramPacket(vett, vett.length);
+            ritorno.setAddress(p1.getPacket().getAddress());
+            ritorno.setPort(p1.getPacket().getPort());
+            try {
+                s.send(ritorno);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            situazione="inflitti;"+p1.getattivo()+";"+v+";"+"";
+            vett=situazione.getBytes();
+            ritorno=new DatagramPacket(vett, vett.length);
+            ritorno.setAddress(p1.getPacket().getAddress());
+            ritorno.setPort(p1.getPacket().getPort());
+            try {
+                s.send(ritorno);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            controlloStato(p1, p2, s);
+        }
+        while(true && p2.getPunti()<3){
             boolean allenatore=false;
             s = new DatagramSocket(12345);
             byte[] buffer= new byte[1500];
@@ -405,7 +497,6 @@ class server{
                 else{
                     inviaRisposta(p1, s, "no");
                 }
-
             }
             else if(codice[0].equals("evolvi")){
                 if(p1.evolvi(codice[1], codice[2], codice[3])){
@@ -424,7 +515,13 @@ class server{
                 }
             }
             else if(codice[0].equals("attacco")){
-                controllaAtacco(p1, p2, s, Integer.parseInt(codice[1]));
+                if(!((Pokemon)p1.getattivo()).getStato().equals("paralizzato")||!((Pokemon)p1.getattivo()).getStato().equals("addormentato")){
+                    controllaAtacco(p1, p2, s, Integer.parseInt(codice[1]));
+                }
+                else{
+                    ((Pokemon)p1.getattivo()).setStato("");
+                }
+                controlloStato(p1, p2, s);
                 turno=2;
                 break;
             }

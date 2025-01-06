@@ -128,4 +128,8 @@ class Pokemon extends Carta{
     public void setStato(String s){
         this.stato=s;
     }
+
+    public String getStato(){
+        return this.stato;
+    }
 }

@@ -106,7 +106,10 @@ class Player{
 
     public boolean sostituisci(String p){
         int i=this.cercaPanchina(p);
-        if(this.attivo==null && i!=1){
+        if(this.attivo==null && i!=1 && !(((Pokemon)this.attivo).getStato().equals("paralizzato")||((Pokemon)this.attivo).getStato().equals("addormentato"))){
+            if(((Pokemon)this.attivo).getStato().equals("avvelenato")){
+                ((Pokemon)this.attivo).setStato("");
+            }
             this.attivo=this.panchina.get(i);
             this.panchina.remove(i);
             return true;
@@ -266,5 +269,18 @@ class Player{
 
     public String ottieniNome(int i){
         return ((Pokemon)this.panchina.get(i)).getNome();
+    }
+
+    public void scarta(){
+        this.scartate.add(this.attivo);
+        this.attivo=null;
+    }
+
+    public void giocata(String n){
+        int i=this.cercaMano(n);
+        if(i!=-1){
+            this.scartate.add(this.mano.get(i));
+            this.mano.remove(i);
+        }
     }
 }
