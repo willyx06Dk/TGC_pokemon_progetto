@@ -174,7 +174,7 @@ namespace PockemonTCGp_Grafica
                             this.Invoke(new Action(() =>
                             {
                                 MessageBox.Show("Connessione confermata. Passando alla scelta del mazzo...");
-                                FormSceltaMazzo formSceltaMazzo = new FormSceltaMazzo();
+                                FormSceltaMazzo formSceltaMazzo = new FormSceltaMazzo(udpListener, remoteEndPoint);
                                 formSceltaMazzo.Show();
                                 this.Hide();
                             }));
@@ -205,4 +205,4 @@ namespace PockemonTCGp_Grafica
         }
     }
 }
-} //---Dzyubanov---
+ //---Dzyubanov---

@@ -55,6 +55,12 @@
     <Compile Include="FormCaricamento.Designer.cs">
       <DependentUpon>FormCaricamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGioco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGioco.Designer.cs">
+      <DependentUpon>FormGioco.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIniziale.cs">
       <SubType>Form</SubType>
     </Compile>

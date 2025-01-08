@@ -111,7 +111,10 @@ namespace PockemonTCGp_Grafica
                 }
                 else if (messaggio == "inizio gioco")
                 {
-                    //*** passa al form del gioco bla bla
+                    FormGioco formGioco = new FormGioco();
+                    this.Hide();
+                    formGioco.ShowDialog();
+                    this.Close();
                     break;
                 }
             }
