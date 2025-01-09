@@ -91,10 +91,10 @@ namespace PockemonTCGp_Grafica
 
             await udpClient.SendAsync(data, data.Length, serverEndpoint);
 
-            RiceviMessaggiDalServer();
+            RiceviMessaggiDalServer(nomeMazzo);
         }
 
-        private async void RiceviMessaggiDalServer()
+        private async void RiceviMessaggiDalServer(string nomeMazzo)
         {
             while (true)
             {
@@ -112,10 +112,15 @@ namespace PockemonTCGp_Grafica
                 else if (messaggio == "inizio gioco")
                 {
                     FormGioco formGioco = new FormGioco();
+                    formGioco.EnergiaScelta = nomeMazzo;
+                    formGioco.Show();
+                    this.Hide();
+                    break;
+                    /*FormGioco formGioco = new FormGioco();
                     this.Hide();
                     formGioco.ShowDialog();
                     this.Close();
-                    break;
+                    break;*/
                 }
             }
         }

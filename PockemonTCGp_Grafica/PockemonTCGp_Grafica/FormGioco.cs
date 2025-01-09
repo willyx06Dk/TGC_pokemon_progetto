@@ -13,12 +13,12 @@ namespace PockemonTCGp_Grafica
 {
     public partial class FormGioco : Form
     {
+        public string EnergiaScelta { get; set; }
         private PictureBox energiaPictureBox;
         private string energiaScelta;
         public FormGioco()
         {
             InitializeComponent();
-            //this.energiaScelta = energiaScelta; 
             ImpostaDimensioniFisse();
             CaricaBackground();
             AggiungiImmagineEnergia();
