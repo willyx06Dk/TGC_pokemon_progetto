@@ -26,6 +26,10 @@ namespace PockemonTCGp_Grafica
             CarteScartate = new List<Carta>();
         }
 
+        public void AggiungiInMano(Carta carta)
+        {
+            CarteInMano.Add(carta);
+        }
         public void PescaCarta(Carta carta)
         {
             CarteInMano.Add(carta);

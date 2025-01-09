@@ -85,6 +85,7 @@ namespace PockemonTCGp_Grafica
 
                     this.Invoke((MethodInvoker)(() =>
                     {
+                        //****
                         //FormGioco formGioco = new FormGioco(udpClient, serverEndpoint);
                         //this.Hide();
                         //formGioco.ShowDialog();

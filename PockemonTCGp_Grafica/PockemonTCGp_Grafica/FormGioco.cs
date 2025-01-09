@@ -19,11 +19,14 @@ namespace PockemonTCGp_Grafica
         public string NomeGiocatore1 { get; set; }
         public string NomeGiocatore2 { get; set; }
         public string EnergiaScelta { get; set; }
-
-        private UdpClient udpClient; 
+        private UdpClient udpClient;
         private Thread listenerThread;
         private IPEndPoint serverEndPoint;
         private PictureBox energiaPictureBox;
+        private Label etichettaNomiGiocatori;
+
+        public Player giocatore { get; set; }
+        public Player nemico { get; set; }
 
         public FormGioco(string energiaScelta, IPEndPoint serverEndPoint, UdpClient udpClient)
         {
@@ -35,6 +38,7 @@ namespace PockemonTCGp_Grafica
             ImpostaDimensioniFisse();
             CaricaBackground();
             AggiungiImmagineEnergia();
+            AggiungiEtichettaNomiGiocatori();
             AvviaListenerUdp();
         }
 
@@ -100,6 +104,7 @@ namespace PockemonTCGp_Grafica
             e.Effect = DragDropEffects.Move;
         }
 
+        //***
         private void AvviaListenerUdp()
         {
             listenerThread = new Thread(() =>
@@ -112,15 +117,24 @@ namespace PockemonTCGp_Grafica
                         byte[] datiRicevuti = udpClient.Receive(ref remoteEndPoint);
                         string messaggio = Encoding.UTF8.GetString(datiRicevuti);
 
-                        // Processa il messaggio ricevuto
                         this.Invoke(new Action(() =>
                         {
-                            MessageBox.Show($"Messaggio ricevuto: {messaggio}");
+                            if (messaggio.StartsWith("NOMI:"))
+                            {
+                                string[] nomi = messaggio.Substring(5).Split(',');
+                                NomeGiocatore1 = nomi[0];
+                                NomeGiocatore2 = nomi[1];
+                                etichettaNomiGiocatori.Text = $"{NomeGiocatore1} vs {NomeGiocatore2}";
+                            }
+                            else if (messaggio.StartsWith("CARTE:"))
+                            {
+                                RiceviCarteIniziali(messaggio.Substring(6));
+                            }
                         }));
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Errore durante la ricezione: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Errore durante la ricezione: {ex.Message}");
                         break;
                     }
                 }
@@ -129,9 +143,86 @@ namespace PockemonTCGp_Grafica
             listenerThread.Start();
         }
 
+        private void RiceviCarteIniziali(string messaggio)
+        {
+            //pikachu|pokemon,erika|allenatore
+            try
+            {
+                string[] carteDati = messaggio.Split(',');
+
+                foreach (string cartaInfo in carteDati)
+                {
+                    string[] dettagliCarta = cartaInfo.Split('|');
+                    string nomeCarta = dettagliCarta[0];
+                    string tipoCarta = dettagliCarta[1];
+
+
+                    string percorsoImmagine = TrovaImmagineCarta(nomeCarta);
+                    if (!string.IsNullOrEmpty(percorsoImmagine) && File.Exists(percorsoImmagine))
+                    {
+                        Carta carta = new Carta(nomeCarta, percorsoImmagine, tipoCarta);
+
+                        giocatore.AggiungiInMano(carta);
+                    }
+                }
+
+                MessageBox.Show("Carte iniziali ricevute e caricate nel mazzo!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Errore durante la ricezione delle carte: {ex.Message}");
+            }
+        }
+
+        /****
+        //metodo per creare una carta in base al tipo
+       /* private Carta CreaCarta(string nome, string tipo)
+        {
+            switch (tipo.ToLower())
+            {
+                case "pokemon":
+                    return new Pokemon(nome);
+                case "allenatore":
+                    return new Allenatore(nome);
+                case "strumento":
+                    return new Strumento(nome);
+                default:
+                    throw new Exception($"Tipo di carta sconosciuto: {tipo}");
+            }
+        }*/
+
+        private string TrovaImmagineCarta(string nomeCarta)
+        {
+            string percorsoMazzi = Path.Combine(Application.StartupPath, "mazzi", EnergiaScelta);
+            string percorsoImmagine = Path.Combine(percorsoMazzi, nomeCarta + ".png");
+
+            if (!File.Exists(percorsoImmagine))
+            {
+                MessageBox.Show($"Immagine per la carta '{nomeCarta}' non trovata in {percorsoImmagine}");
+                return null;
+            }
+
+            return percorsoImmagine;
+        }
+
+        //per gestire il mes "player1 vs player2"
+        private void AggiungiEtichettaNomiGiocatori()
+        {
+            etichettaNomiGiocatori = new Label
+            {
+                Text = "Caricamento nomi...",
+                Location = new Point(350, 700),
+                Size = new Size(200, 30),
+                ForeColor = Color.White,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            this.Controls.Add(etichettaNomiGiocatori);
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             listenerThread?.Abort();
+            udpClient?.Close();
             base.OnFormClosing(e);
         }
     }

@@ -8,9 +8,9 @@ namespace PockemonTCGp_Grafica
 {
     public class Carta
     {
-        protected string Nome { get; set; }
-        protected string Immagine { get; set; }
-        protected string TipoCarta { get; set; }
+        private string Nome { get; set; }
+        private string Immagine { get; set; }
+        private string TipoCarta { get; set; }
 
         public Carta(string nome, string immagine, string tipoCarta)
         {
