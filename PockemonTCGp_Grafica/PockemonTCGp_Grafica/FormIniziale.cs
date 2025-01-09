@@ -112,7 +112,7 @@ namespace PockemonTCGp_Grafica
             if (File.Exists(percorsoImmagine))
             {
                 this.BackgroundImage = System.Drawing.Image.FromFile(percorsoImmagine);
-                this.BackgroundImageLayout = ImageLayout.Stretch;  // Si adatta al form
+                this.BackgroundImageLayout = ImageLayout.Stretch;  //si adatta al form
             }
             else
             {

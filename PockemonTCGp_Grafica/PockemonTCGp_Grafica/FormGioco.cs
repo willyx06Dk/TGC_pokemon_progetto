@@ -15,10 +15,11 @@ namespace PockemonTCGp_Grafica
     {
         public string EnergiaScelta { get; set; }
         private PictureBox energiaPictureBox;
-        private string energiaScelta;
-        public FormGioco()
+
+        public FormGioco(string energiaSelezionata)
         {
             InitializeComponent();
+            EnergiaScelta = energiaSelezionata;
             ImpostaDimensioniFisse();
             CaricaBackground();
             AggiungiImmagineEnergia();
@@ -26,10 +27,10 @@ namespace PockemonTCGp_Grafica
 
         private void ImpostaDimensioniFisse()
         {
-            this.Size = new Size(900, 770); 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;  
-            this.MaximizeBox = false;  
-            this.StartPosition = FormStartPosition.CenterScreen; 
+            this.Size = new Size(900, 770);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void CaricaBackground()
@@ -39,7 +40,7 @@ namespace PockemonTCGp_Grafica
             if (File.Exists(percorsoImmagine))
             {
                 this.BackgroundImage = Image.FromFile(percorsoImmagine);
-                this.BackgroundImageLayout = ImageLayout.Stretch;  
+                this.BackgroundImageLayout = ImageLayout.Stretch;
             }
             else
             {
@@ -51,13 +52,13 @@ namespace PockemonTCGp_Grafica
         {
             energiaPictureBox = new PictureBox
             {
-                Size = new Size(50, 50),  
-                Location = new Point(this.ClientSize.Width - 60, this.ClientSize.Height - 60), 
+                Size = new Size(50, 50),
+                Location = new Point(this.ClientSize.Width - 60, this.ClientSize.Height - 60),
                 BackColor = Color.Transparent,
-                SizeMode = PictureBoxSizeMode.StretchImage  
+                SizeMode = PictureBoxSizeMode.StretchImage
             };
 
-            string percorsoEnergia = Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie", energiaScelta + ".png");
+            string percorsoEnergia = Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie", EnergiaScelta + ".png");
 
             if (File.Exists(percorsoEnergia))
             {
@@ -68,7 +69,7 @@ namespace PockemonTCGp_Grafica
                 MessageBox.Show("Immagine dell'energia non trovata!");
             }
 
-            energiaPictureBox.MouseDown += EnergiaPictureBox_MouseDown;  //trascinamento
+            energiaPictureBox.MouseDown += EnergiaPictureBox_MouseDown; //trascinamento
             this.Controls.Add(energiaPictureBox);
         }
 
@@ -86,5 +87,4 @@ namespace PockemonTCGp_Grafica
             e.Effect = DragDropEffects.Move;
         }
     }
-}
 }
