@@ -5,7 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,16 +16,26 @@ namespace PockemonTCGp_Grafica
 {
     public partial class FormGioco : Form
     {
+        public string NomeGiocatore1 { get; set; }
+        public string NomeGiocatore2 { get; set; }
         public string EnergiaScelta { get; set; }
+
+        private UdpClient udpClient; 
+        private Thread listenerThread;
+        private IPEndPoint serverEndPoint;
         private PictureBox energiaPictureBox;
 
-        public FormGioco(string energiaSelezionata)
+        public FormGioco(string energiaScelta, IPEndPoint serverEndPoint, UdpClient udpClient)
         {
+            EnergiaScelta = energiaScelta;
+            this.serverEndPoint = serverEndPoint;
+            this.udpClient = udpClient;
+
             InitializeComponent();
-            EnergiaScelta = energiaSelezionata;
             ImpostaDimensioniFisse();
             CaricaBackground();
             AggiungiImmagineEnergia();
+            AvviaListenerUdp();
         }
 
         private void ImpostaDimensioniFisse()
@@ -85,6 +98,41 @@ namespace PockemonTCGp_Grafica
         protected override void OnDragOver(DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
+        }
+
+        private void AvviaListenerUdp()
+        {
+            listenerThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                        byte[] datiRicevuti = udpClient.Receive(ref remoteEndPoint);
+                        string messaggio = Encoding.UTF8.GetString(datiRicevuti);
+
+                        // Processa il messaggio ricevuto
+                        this.Invoke(new Action(() =>
+                        {
+                            MessageBox.Show($"Messaggio ricevuto: {messaggio}");
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Errore durante la ricezione: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                }
+            });
+            listenerThread.IsBackground = true;
+            listenerThread.Start();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            listenerThread?.Abort();
+            base.OnFormClosing(e);
         }
     }
 }

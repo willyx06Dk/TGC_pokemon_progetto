@@ -111,8 +111,7 @@ namespace PockemonTCGp_Grafica
                 }
                 else if (messaggio == "inizio gioco")
                 {
-                    FormGioco formGioco = new FormGioco();
-                    formGioco.EnergiaScelta = nomeMazzo;
+                    FormGioco formGioco = new FormGioco(udpClient, serverEndpoint, nomeMazzo);
                     formGioco.Show();
                     this.Hide();
                     break;
