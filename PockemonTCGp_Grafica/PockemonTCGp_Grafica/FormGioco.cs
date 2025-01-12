@@ -52,7 +52,7 @@ namespace PockemonTCGp_Grafica
 
         private void CaricaBackground()
         {
-            string percorsoImmagine = Path.Combine(Application.StartupPath, "pokemonTCG_img", "game_background.jpeg");
+            string percorsoImmagine = Path.Combine(Application.StartupPath, "pokemonTCG_img", "game_background.png");
 
             if (File.Exists(percorsoImmagine))
             {

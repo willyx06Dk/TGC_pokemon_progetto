@@ -56,7 +56,7 @@ namespace PockemonTCGp_Grafica
                 return;
             }
 
-            mazzoPaths = Directory.GetFiles(energieFolder, "*.jpg");
+            mazzoPaths = Directory.GetFiles(energieFolder, "*.png");
             mazziImages = new PictureBox[mazzoPaths.Length];
 
             int startX = 50, startY = 200, spacing = 20;

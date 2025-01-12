@@ -157,14 +157,14 @@ namespace PockemonTCGp_Grafica
 
         private void AvviaListenerUdp()
         {
-            udpListener = new UdpClient(12346); //porta per ricevere messaggi
+            udpListener = new UdpClient(12345); //porta per ricevere messaggi
             listenerThread = new Thread(() =>
             {
                 while (true)
                 {
                     try
                     {
-                        IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 12346);
+                        IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 12345);
                         byte[] datiRicevuti = udpListener.Receive(ref remoteEndPoint);
                         string messaggio = Encoding.UTF8.GetString(datiRicevuti);
 
