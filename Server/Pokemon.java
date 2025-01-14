@@ -85,7 +85,7 @@ class Pokemon extends Carta{
         if(file.exists()){
             FileReader fr;
             try {
-                fr = new FileReader("attacchi/"+file+".txt");
+                fr = new FileReader("../attacchi/"+file+".txt");
                 BufferedReader bf=new BufferedReader(fr);
                 String riga;
                 while((riga=bf.readLine())!=null){

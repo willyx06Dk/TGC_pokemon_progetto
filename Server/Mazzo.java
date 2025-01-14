@@ -50,7 +50,7 @@ class Mazzo {
         if(file.exists()){
             FileReader fr;
             try {
-                fr = new FileReader("mazzi/"+file+".txt");
+                fr = new FileReader("../mazzi/"+file+".txt");
                 BufferedReader bf=new BufferedReader(fr);
                 for (int index = 0; index < 20; index++) {
                     String riga=bf.readLine();

@@ -4,7 +4,7 @@ import java.net.DatagramSocket;
 import java.util.Random;
 
 class server{
-    public void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         Player p1=null;
         Player p2=null;
         int giocatori=0;
@@ -24,13 +24,15 @@ class server{
                     p2=new Player(messaggio, packet);
                 }
                 giocatori++;
-                String ok="ok";
+                String ok="OK";
                 buffer=ok.getBytes();
                 DatagramPacket inserito=new DatagramPacket(buffer, buffer.length);
                 inserito.setAddress(packet.getAddress());
                 inserito.setPort(packet.getPort());
                 socket.send(inserito);
+                System.out.println(messaggio);
             }
+            socket.close();
         }
         boolean scelta1=false;
         boolean scelta2=false;
@@ -60,6 +62,7 @@ class server{
                 packet.setPort(packet.getPort());
                 socket.send(attesa);
             }
+            socket.close();
         }
         Random r=new Random();
         turno=r.nextInt(1)+1;
