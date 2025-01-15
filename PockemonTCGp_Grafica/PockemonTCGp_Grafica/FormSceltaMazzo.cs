@@ -28,25 +28,9 @@ namespace PockemonTCGp_Grafica
             this.serverEndpoint = serverEndpoint;
 
             this.Size = new Size(900, 770);
-            CaricaBackground();
             MostraMazzi();
             ImpostaDimensioniFisse();
         }
-
-        private void CaricaBackground()
-        {
-            string percorsoImmagine = Path.Combine(Application.StartupPath, "pokemonTCG_img", "background.jpg");
-            if (File.Exists(percorsoImmagine))
-            {
-                this.BackgroundImage = Image.FromFile(percorsoImmagine);
-                this.BackgroundImageLayout = ImageLayout.Stretch;
-            }
-            else
-            {
-                MessageBox.Show("Sfondo non trovato!");
-            }
-        }
-
         private void MostraMazzi()
         {
             string energieFolder = Path.Combine(Application.StartupPath, "pokemonTCG_img", "energie");
@@ -103,7 +87,7 @@ namespace PockemonTCGp_Grafica
 
                 if (messaggio == "attendi")
                 {
-                    FormCaricamento formCaricamento = new FormCaricamento(udpClient, serverEndpoint);
+                    FormCaricamento formCaricamento = new FormCaricamento(nomeMazzo, udpClient, serverEndpoint);
                     this.Hide();
                     formCaricamento.ShowDialog();
                     this.Close();
@@ -111,17 +95,10 @@ namespace PockemonTCGp_Grafica
                 }
                 else if (messaggio == "inizio gioco")
                 {
-                    //****FormGioco formGioco = new FormGioco(udpClient, serverEndpoint, nomeMazzo);
-                    //formGioco.Show();
-                    //this.Hide();
-                   // break;
-
-
-                    /*FormGioco formGioco = new FormGioco();
+                    FormGioco formGioco = new FormGioco(nomeMazzo, serverEndpoint, udpClient);
+                    formGioco.Show();
                     this.Hide();
-                    formGioco.ShowDialog();
-                    this.Close();
-                    break;*/
+                    break;
                 }
             }
         }

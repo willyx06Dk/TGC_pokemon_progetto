@@ -19,11 +19,12 @@ namespace PockemonTCGp_Grafica
         private IPEndPoint serverEndpoint;
         private Label labelCaricamento;
         private bool isCaricamentoAttivo;
-
-        public FormCaricamento(UdpClient udpClient, IPEndPoint serverEndpoint)
+        private string tipoMazzo;
+        public FormCaricamento(string tipoMazzo, UdpClient udpClient, IPEndPoint serverEndpoint)
         {
             InitializeComponent();
 
+            this.tipoMazzo = tipoMazzo;
             this.udpClient = udpClient;
             this.serverEndpoint = serverEndpoint;
 
@@ -85,11 +86,10 @@ namespace PockemonTCGp_Grafica
 
                     this.Invoke((MethodInvoker)(() =>
                     {
-                        //****
-                        //FormGioco formGioco = new FormGioco(udpClient, serverEndpoint);
-                        //this.Hide();
-                        //formGioco.ShowDialog();
-                        //this.Close();
+                        FormGioco formGioco = new FormGioco(tipoMazzo, serverEndpoint, udpClient);
+                        formGioco.Show();
+                        this.Hide();
+                        break;
                     }));
                     break;
                 }
