@@ -89,7 +89,7 @@ namespace PockemonTCGp_Grafica
                         FormGioco formGioco = new FormGioco(tipoMazzo, serverEndpoint, udpClient);
                         formGioco.Show();
                         this.Hide();
-                        break;
+                        //break;
                     }));
                     break;
                 }

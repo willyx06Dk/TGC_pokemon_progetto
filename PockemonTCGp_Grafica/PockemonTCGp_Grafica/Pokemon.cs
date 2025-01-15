@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace PockemonTCGp_Grafica
