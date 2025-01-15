@@ -23,12 +23,15 @@ namespace PockemonTCGp_Grafica
         private Player giocatore;
 
         //per comunicazione UDP
-        private UdpClient udpListener;
+        private UdpClient udpClient;
         private Thread listenerThread;
 
         public FormIniziale()
         {
             InitializeComponent();
+            UdpClient udpClient = new UdpClient();
+
+            InizzializzaUDPClient();
 
             menu();
             CaricaBackground();
@@ -141,13 +144,25 @@ namespace PockemonTCGp_Grafica
         {
             try
             {
-                using (UdpClient udpClient = new UdpClient())
-                {
-                    string ipServer = "127.0.0.1"; 
-                    int portaServer = 12345;      
-                    byte[] dati = Encoding.UTF8.GetBytes(nomeGiocatore);
-                    udpClient.Send(dati, dati.Length, ipServer, portaServer);
-                }
+                string ipServer = "127.0.0.1"; 
+                int portaServer = 12345;      
+                byte[] dati = Encoding.UTF8.GetBytes(nomeGiocatore);
+                udpClient.Send(dati, dati.Length, ipServer, portaServer);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Errore durante l'invio: {ex.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void InizzializzaUDPClient()
+        {
+            try
+            {
+                string ipServer = "127.0.0.2";
+                int portaServer = 12345;
+                byte[] dati = Encoding.UTF8.GetBytes("");
+                udpClient.Send(dati, dati.Length, ipServer, portaServer);
             }
             catch (Exception ex)
             {
@@ -157,7 +172,7 @@ namespace PockemonTCGp_Grafica
 
         private void AvviaListenerUdp()
         {
-            udpListener = new UdpClient(12345); //porta per ricevere messaggi
+            udpClient = new UdpClient(); 
             listenerThread = new Thread(() =>
             {
                 while (true)
@@ -165,7 +180,7 @@ namespace PockemonTCGp_Grafica
                     try
                     {
                         IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 12345);
-                        byte[] datiRicevuti = udpListener.Receive(ref remoteEndPoint);
+                        byte[] datiRicevuti = udpClient.Receive(ref remoteEndPoint);
                         string messaggio = Encoding.UTF8.GetString(datiRicevuti);
 
                         if (messaggio == "OK")
@@ -174,7 +189,7 @@ namespace PockemonTCGp_Grafica
                             this.Invoke(new Action(() =>
                             {
                                 MessageBox.Show("Connessione confermata. Passando alla scelta del mazzo...");
-                                FormSceltaMazzo formSceltaMazzo = new FormSceltaMazzo(udpListener, remoteEndPoint);
+                                FormSceltaMazzo formSceltaMazzo = new FormSceltaMazzo(udpClient, remoteEndPoint);
                                 formSceltaMazzo.Show();
                                 this.Hide();
                             }));
@@ -199,7 +214,7 @@ namespace PockemonTCGp_Grafica
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            udpListener?.Close();
+            udpClient?.Close();
             listenerThread?.Abort();
             base.OnFormClosing(e);
         }
